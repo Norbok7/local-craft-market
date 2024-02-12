@@ -1,5 +1,3 @@
-# spec/models/artisan_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe Artisan, type: :model do
