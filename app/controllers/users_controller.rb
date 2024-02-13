@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index]
+  # before_action :authenticate_user!, except: [:show, :index]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create, :show, :edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -11,6 +12,15 @@ class UsersController < ApplicationController
     render json: @user, status: :ok
   end
 
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      render json: @user, status: :created
+    else
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   def edit
   end
 
@@ -18,7 +28,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user, status: :ok
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -34,6 +44,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :password, :email, :user_type)
   end
 end

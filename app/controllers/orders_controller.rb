@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
+
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -47,6 +49,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:user_id, :product_id, :quantity, :total_price, :status)
+    params.require(:order).permit(:order_date, :total_amount, :user_id)
   end
+  
 end

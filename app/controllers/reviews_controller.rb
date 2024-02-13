@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_review, only: [:show, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
 
   def index
     @reviews = Review.all
@@ -11,27 +11,20 @@ class ReviewsController < ApplicationController
     render json: @review, status: :ok
   end
 
-  def new
-    @review = Review.new
-  end
-
   def create
     @review = Review.new(review_params)
     if @review.save
       render json: @review, status: :created
     else
-      render json: @review.errors, status: :unprocessable_entity
+      render json: { errors: @review.errors.full_messages }, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
     if @review.update(review_params)
       render json: @review, status: :ok
     else
-      render json: @review.errors, status: :unprocessable_entity
+      render json: { errors: @review.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

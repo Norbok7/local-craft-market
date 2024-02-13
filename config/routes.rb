@@ -29,5 +29,11 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
   end
 
+  # Add route for the OrderItems controller
+  resources :order_items
+
+  #route for products controller
+  resources :products
+
   # Other routes and root route definitions can go here
 end
