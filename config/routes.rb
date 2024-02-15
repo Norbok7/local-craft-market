@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+
   # Define routes for the Artisans controller
   resources :artisans
 
