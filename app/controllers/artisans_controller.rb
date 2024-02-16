@@ -14,6 +14,12 @@ class ArtisansController < ApplicationController
     render json: @artisan, status: :ok
   end
 
+  # GET /artisans/:id/products
+  def by_artisan
+    @products = Product.where(artisan_id: params[:id])
+    render json: @products, status: :ok
+  end
+  
   # GET /artisans/new
   def new
     @artisan = Artisan.new
@@ -33,14 +39,14 @@ class ArtisansController < ApplicationController
   def edit
   end
 
- # PATCH /artisans/:id
-def update
-  if @artisan.update(artisan_params)
-    render json: @artisan, status: :ok
-  else
-    render json: { errors: @artisan.errors.full_messages }, status: :unprocessable_entity
+  # PATCH /artisans/:id
+  def update
+    if @artisan.update(artisan_params)
+      render json: @artisan, status: :ok
+    else
+      render json: { errors: @artisan.errors.full_messages }, status: :unprocessable_entity
+    end
   end
-end
 
   # DELETE /artisans/:id
   def destroy

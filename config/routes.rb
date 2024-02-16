@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  
-
   # Define routes for the Artisans controller
   resources :artisans
 
@@ -8,6 +6,9 @@ Rails.application.routes.draw do
   resources :artisans do
     resources :products
   end
+
+  # Define a custom route for fetching products by artisan ID
+  get 'artisans/:id/products', to: 'products#by_artisan'
 
   # Define routes for the Orders controller
   resources :orders
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
   # Add route for the OrderItems controller
   resources :order_items
 
-  #route for products controller
+  # Route for the Products controller
   resources :products
 
   # Other routes and root route definitions can go here
