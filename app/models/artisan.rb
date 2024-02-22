@@ -3,6 +3,6 @@ class Artisan < ApplicationRecord
   validates :location, presence: true
   validates :bio, presence: true, allow_blank: true # Make bio optional
 
-  
+  belongs_to :user
   has_many :products
 end

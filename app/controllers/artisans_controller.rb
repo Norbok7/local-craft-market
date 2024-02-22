@@ -1,8 +1,8 @@
 class ArtisansController < ApplicationController
   # before_action :authenticate_user!, except: [:show, :index]
   before_action :set_artisan, only: [:show, :edit, :update, :destroy]
-  skip_before_action :verify_authenticity_token
-
+  skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
+  skip_before_action :authenticate_request, only: [:index] # Add this line
   # GET /artisans
   def index
     @artisans = Artisan.all

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
+  skip_before_action :authenticate_request, only: [:index]  # Skip authentication for index action
   skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
 
   def index

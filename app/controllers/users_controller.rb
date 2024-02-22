@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :verify_authenticity_token, only: [:create, :show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :verify_authenticity_token, except: [:index, :show, :create]
 
   def index
     @users = User.all
@@ -19,9 +18,6 @@ class UsersController < ApplicationController
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
