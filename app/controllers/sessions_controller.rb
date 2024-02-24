@@ -1,5 +1,8 @@
+require_relative "../../lib/json_web_token"
+
 class SessionsController < ApplicationController
   skip_before_action :authenticate_request, only: :create
+  skip_before_action :verify_authenticity_token, only: :create # Add this line to skip CSRF token verification for the create action
 
   def create
     user = User.find_by(username: params[:username])
@@ -14,7 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     # You may want to implement a logout functionality for JWT tokens, but it's not common.
-    # Since JWT tokens are stateless, there's no explicit logout method. 
+    # Since JWT tokens are stateless, there's no explicit logout method.
     # Typically, you'd rely on the token's expiration time for "logout".
     render json: { message: 'Logout successful' }
   end
