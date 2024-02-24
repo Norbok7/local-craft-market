@@ -1,5 +1,3 @@
-require_relative "../../lib/json_web_token"
-
 class SessionsController < ApplicationController
   skip_before_action :authenticate_request, only: :create
   skip_before_action :verify_authenticity_token, only: :create # Add this line to skip CSRF token verification for the create action
@@ -9,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       token = JsonWebToken.encode(user_id: user.id)
-      render json: { token: token }
+      render json: { token: token, user_id: user.id }
     else
       render json: { error: 'Invalid username or password' }, status: :unauthorized
     end
