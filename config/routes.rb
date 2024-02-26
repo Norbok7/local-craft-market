@@ -32,6 +32,10 @@ Rails.application.routes.draw do
 
   # Define routes for the Products controller
   resources :products
+ 
+  # Custom route for fetching the current user
+  get '/users/current', to: 'users#current'
+
 
   # Define root route
   root 'home#index'

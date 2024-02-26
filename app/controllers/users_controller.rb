@@ -33,6 +33,14 @@ class UsersController < ApplicationController
     head :no_content, status: :ok
   end
 
+  def current
+    if current_user
+      render json: current_user, status: :ok
+    else
+      render json: { errors: 'User not found' }, status: :not_found
+    end
+  end
+
   private
 
   def set_user
