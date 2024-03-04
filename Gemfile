@@ -8,8 +8,6 @@ gem "rails", "~> 7.1.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-
-
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
@@ -37,20 +35,28 @@ gem "jbuilder"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem 'faker'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 gem 'httparty'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 gem 'jwt'
 gem 'rack-cors'
 gem 'bcrypt'
+
+
+group :production do 
+  gem 'pg'
+end
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
   gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 5.0'
-
+  gem "sqlite3", "~> 1.4"
 end
 
 group :development do
@@ -63,7 +69,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+  
 end
 
 group :test do
@@ -72,6 +78,3 @@ group :test do
   gem "selenium-webdriver"
 end
 
-group :production do 
-'pg'
-end
