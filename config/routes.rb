@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   # Custom route for fetching the current user
   get '/users/current', to: 'users#current'
 
-
   # Define root route
-  root 'home#index'
+  root 'artisans#index' # Setting root to artisans#index
 end
