@@ -20,6 +20,12 @@ class ReviewsController < ApplicationController
     end
   end
 
+    # GET /products/:product_id/reviews
+    def by_product
+      @reviews = Review.where(product_id: params[:product_id])
+      render json: @reviews, status: :ok
+    end
+
   def update
     if @review.update(review_params)
       render json: @review, status: :ok
