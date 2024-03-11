@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  before_action :verify_authenticity_token, except: [:index, :show, :create]
+  before_action :verify_authenticity_token, except: [:index, :show]
 
   def index
     @users = User.all
