@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   # Define routes for the Products controller
   resources :products
 
+  # Define a custom route for changing user password
+  put '/users/:id/change-password', to: 'users#change_password', as: 'change_user_password'
+
   # Custom route for fetching reviews for a specific product
   get 'products/:product_id/reviews', to: 'reviews#by_product', as: 'product_reviews'
 

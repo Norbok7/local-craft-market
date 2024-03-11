@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :change_password]
   before_action :verify_authenticity_token, except: [:index, :show]
-  skip_before_action :authenticate_request, only: :create  # Skip authentication for the create action
+  skip_before_action :authenticate_request, only: [:create]  # Skip authentication for the create action
 
   def index
     @users = User.all
@@ -41,6 +41,15 @@ class UsersController < ApplicationController
       render json: { errors: 'User not found' }, status: :not_found
     end
   end
+
+  def change_password
+    if @user.update(user_params)
+      render json: @user, status: :ok
+    else
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
 
   private
 
