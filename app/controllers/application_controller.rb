@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session # Disable CSRF protection for API endpoints
 
-  before_action :authenticate_request, except: [:create] # Skip authentication for create action
+  before_action :authenticate_request # Ensure authentication for all actions
 
   private
 
