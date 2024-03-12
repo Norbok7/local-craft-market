@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  # before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
 
   before_action :set_order, only: [:show, :edit, :update, :destroy]
@@ -19,12 +18,15 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.user_id = @current_user.id  # Assuming you have a method to get the current user
+  
     if @order.save
       render json: @order, status: :created
     else
       render json: @order.errors, status: :unprocessable_entity
     end
   end
+  
 
   def edit
   end
