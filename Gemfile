@@ -45,7 +45,7 @@ gem 'httparty'
 gem 'jwt'
 gem 'rack-cors'
 gem 'bcrypt'
-
+gem 'pusher'
 
 group :production do 
   gem 'pg'

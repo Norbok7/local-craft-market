@@ -1,8 +1,8 @@
 class ArtisansController < ApplicationController
-  # before_action :authenticate_user!, except: [:show, :index]
   before_action :set_artisan, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
-  skip_before_action :authenticate_request, only: [:index] # Add this line
+  skip_before_action :authenticate_request, only: [:index, :create] # Add :create to skip authentication for the create action
+
   # GET /artisans
   def index
     @artisans = Artisan.all
@@ -63,7 +63,6 @@ class ArtisansController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def artisan_params
-    params.require(:artisan).permit(:artisan_name, :location, :bio, :other_attributes)
+    params.require(:artisan).permit(:artisan_name, :bio, :other_attributes)
   end
-  
 end
