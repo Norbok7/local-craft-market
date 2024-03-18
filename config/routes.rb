@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :order_items
   end
 
+  # Define a custom route for fetching orders by user ID
+  get 'users/:user_id/orders', to: 'orders#by_user'
+
   # Define routes for the Users controller
   resources :users
 

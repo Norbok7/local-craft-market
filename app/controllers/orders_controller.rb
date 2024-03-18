@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token
-
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -27,6 +26,11 @@ class OrdersController < ApplicationController
     end
   end
   
+  # Define a custom action to fetch orders by user ID
+  def by_user
+    @orders = Order.where(user_id: params[:user_id])
+    render json: @orders, status: :ok
+  end
 
   def edit
   end
@@ -53,5 +57,4 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:order_date, :total_amount, :user_id)
   end
-  
 end
