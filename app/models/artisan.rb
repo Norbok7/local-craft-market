@@ -1,8 +1,8 @@
 class Artisan < ApplicationRecord
-  validates :artisan_name, presence: true
-  # validates :location, presence: true
-  validates :bio, presence: true, allow_blank: true # Make bio optional
+  # validates :username, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 4 }
+  validates :bio, presence: true # Make bio required
+  validates :user_type, presence: true, inclusion: { in: %w(Artisan Buyer) } # Ensure user_type is one of "Artisan" or "Buyer"
 
-  belongs_to :user
   has_many :products
 end

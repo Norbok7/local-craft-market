@@ -63,6 +63,6 @@ class ArtisansController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def artisan_params
-    params.require(:artisan).permit(:artisan_name, :bio, :other_attributes)
+    params.require(:artisan).permit(:username, :password, :bio, :user_type) # Ensure userType is permitted here
   end
 end
