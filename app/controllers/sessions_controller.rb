@@ -7,9 +7,16 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       token = JsonWebToken.encode(user_id: user.id)
-      render json: { token: token, user_id: user.id }
+      render json: { token: token, user_id: user.id, user_type: user.user_type }
     else
-      render json: { error: 'Invalid username or password' }, status: :unauthorized
+      artisan = Artisan.find_by(username: params[:username])
+      if artisan && artisan.authenticate(params[:password])
+        token = JsonWebToken.encode(user_id: artisan.id)
+        render json: { token: token, user_id: artisan.id, user_type: 'Artisan' }
+      else
+        puts "Login failed. User: #{params[:username]}, Password: #{params[:password]}"
+        render json: { error: 'Invalid username or password' }, status: :unauthorized
+      end
     end
   end
 

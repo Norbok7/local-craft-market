@@ -1,7 +1,7 @@
 class ArtisansController < ApplicationController
   before_action :set_artisan, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
-  skip_before_action :authenticate_request, only: [:index, :create] # Add :create to skip authentication for the create action
+  before_action :authenticate_request, except: [:index, :show, :create] # Ensure authentication for all actions except index, show, and create
 
   # GET /artisans
   def index
