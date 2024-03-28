@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+  # Define a custom route for fetching products by artisan ID
+  get 'artisans/:artisan_id/products', to: 'products#by_artisan'
+
   # Define routes for the Artisans controller
   resources :artisans do
     resources :products
   end
-
-  # Define a custom route for fetching products by artisan ID
-  get 'artisans/:id/products', to: 'products#by_artisan'
 
   # Define routes for the Orders controller
   resources :orders do
@@ -29,9 +29,9 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   # Define routes for the Admin namespace
-  namespace :admin do
-    resources :dashboard, only: [:index]
-  end
+  # namespace :admin do
+  #   resources :dashboard, only: [:index]
+  # end
 
   # Add route for the OrderItems controller
   resources :order_items

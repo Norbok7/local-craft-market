@@ -34,12 +34,19 @@ class ProductsController < ApplicationController
     head :no_content, status: :ok
   end
 
+  def by_artisan
+    @products = Product.where(artisan_id: params[:artisan_id])
+    render json: @products, status: :ok
+  end
+  
+  
+
   private
 
   def set_product
     @product = Product.find(params[:id])
   end
-
+  
   def product_params
     params.require(:product).permit(:title, :description, :category, :price, :quantity, :artisan_id)
   end

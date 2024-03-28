@@ -19,6 +19,8 @@ class ArtisansController < ApplicationController
     @products = Product.where(artisan_id: params[:id])
     render json: @products, status: :ok
   end
+
+  
   
   # GET /artisans/new
   def new
