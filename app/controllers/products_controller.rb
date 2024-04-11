@@ -17,6 +17,7 @@ class ProductsController < ApplicationController
     if @product.save
       render json: @product, status: :created
     else
+      Rails.logger.error("Errors occurred while creating product: #{@product.errors}")
       render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
     end
   end
@@ -48,6 +49,6 @@ class ProductsController < ApplicationController
   end
   
   def product_params
-    params.require(:product).permit(:title, :description, :category, :price, :quantity, :artisan_id)
+    params.require(:product).permit(:title, :description, :category, :price, :quantity, :image_url, :artisan_id)
   end
 end

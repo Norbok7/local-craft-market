@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy, :change_password]
   before_action :verify_authenticity_token, except: [:index, :show]
-  skip_before_action :authenticate_request, only: [:create]  # Skip authentication for the create action
-
+  skip_before_action :authenticate_request, only: [:create]  
+  
   def index
     @users = User.all
     render json: @users, status: :ok
